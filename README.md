@@ -1,9 +1,9 @@
 # ec2-steamStreamer
 terraform and powershell code to automate the creation of a windows ec2 instance running steam
 
-The utlimate goal here is partly to sketch this up with providers and similar instance types for Azure and GCP as well, and see if any one works better than the others, but mostly to play with terraform.
+- The utlimate goal here is, partly, to sketch this up with providers and similar instance types for Azure and GCP, and see if any one cloud provider's service offering works better for this use case than the others, but mostly, to play with terraform and learn how to bootstrap windows instances with powershell.
 
-Testing with the Monkey Island games.  On a manually built version of this thing, Secret of Monkey Island audio was somewhat choppy, but not bad and video was fine.  Escape from MI wouldn't even start streaming, it just hung, probably because of a failed DirectX install.  Tales of MI streamed, but was so choppy it was unplayable.  I suspect this is a limitation of my home internet speeds (about 125-ish down and 100-ish up), but it's worth trying it on different instance types before doing anything drastic and soul crushing, like installing Windows 10 on my laptop.
+- Testing is being done with the Monkey Island games.  On a manually built version of this thing, Secret of Monkey Island audio was somewhat choppy, but not bad and video was fine.  Escape from MI wouldn't even start streaming, it just hung, probably because of a failed DirectX install.  Tales of MI streamed, but was so choppy it was unplayable.  I suspect this is a limitation of my home internet speeds (about 125-ish down and 100-ish up), but it's worth trying it on different instance types and with similar instance types with different cloud providers, before I take the shameful and soul-crushing route of installing Windows 10 on my laptop.
 
 ### TODO:
 
@@ -35,6 +35,8 @@ https://www.zerotier.com/
 
  Note: the vpcid variable currently isn't used, as the vpc gets matched via the security group parameter.
 
- 7. Run terraform plan to see what will be created, terraform apply to create it, and/or terraform destroy to tear it all down.
+## Deploy:
 
- 8. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, log into steam, see if you can stream games on your local machine.
+ 1. Run terraform plan to see what will be created, terraform apply to create it, and/or terraform destroy to tear it all down.
+
+ 2. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, log into steam, see if you can stream games on your local machine.
