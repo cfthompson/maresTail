@@ -42,4 +42,4 @@ https://www.zerotier.com/
 
  1. Run terraform plan to see what will be created, terraform apply to create it, and/or terraform destroy to tear it all down.
 
- 2. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, log into steam, see if you can stream games on your local machine.
+ 2. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, install VB-Cable, log into steam, click the noLockLogout shortcut, login to steam on your local linux machine, and see if you can stream your windows games.
