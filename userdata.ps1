@@ -12,7 +12,7 @@ $Shortcut.TargetPath = "C:\Windows\System32\tscon.exe";
 $Shortcut.Arguments = "%sessionname% /dest:console";
 $Shortcut.Save();
 
-echo "disable Securty Ehanced IE";
+echo "disable Securty Ehanced IE (doesn't seem to be working)";
 
 $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"
 $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"
@@ -26,13 +26,14 @@ echo "install chocolatey";
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'));
 
-echo "install and join vpn (to be implemnted later)";
+echo "install and join vpn (to be implemented later)";
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile("https://download.zerotier.com/dist/ZeroTier%20One.msi", "zerotier.msi")
 
 zerotier.msi /q /norestart;
+#pass environement variable to the command to join vpn here
 
 echo "Turn off windows firewall";
 
@@ -50,8 +51,12 @@ Set-Content -Path "$profile" -Value $ChocoProfileValue -Force
 
 . $profile
 
-echo "install vb-cable for sound";
-choco install -y vb-cable
+echo "install vb-cable for sound (needs to be finished manually)";
+#choco install -y vb-cable
+
+wget https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack43.zip -outfile vbcable.zip
+ 
+Expand-Archive .\vbcable.zip
 
 echo "install steam";
 choco install -y steam;
