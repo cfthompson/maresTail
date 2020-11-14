@@ -6,7 +6,7 @@ provider "azurerm" {
 # Create a resource group
 resource "azurerm_resource_group" "gamez-rg" {
   name     = "gamez-rg"
-  location = "US East"
+  location = "eastus"
 }
 
 # Create a virtual network within the resource group
@@ -41,11 +41,11 @@ resource "azurerm_windows_virtual_machine" "gamez-vm" {
   resource_group_name = azurerm_resource_group.gamez-rg.name
   location            = azurerm_resource_group.gamez-rg.location
   size                = "Standard_F2"
-  #NC6 Promo
-  admin_username      = "guybrush"
-  admin_password      = "uFightL1ke@c0w"
+  #Standard_NC6_Promo
+  admin_username = "guybrush"
+  admin_password = "uFightL1ke@c0w"
   network_interface_ids = [
-    azurerm_network_interface.gamez.id,
+    azurerm_network_interface.gamez-nic.id,
   ]
 
   os_disk {

@@ -16,12 +16,3 @@ variable "vpcid" {
 variable "key" {
   default = "colin-rdp"
 }
-variable "awsProvider" {
-  default = true
-}
-variable "azureProvider" {
-  default = false
-}
-variable "gcpProvider" {
-  default = false
-}

@@ -7,7 +7,6 @@ provider "aws" {
 }
 
 resource "aws_instance" "gamesInstance" {
-  count         = var.awsProvider ? 1 : 0
   ami           = var.ami
   instance_type = var.instance_type
   root_block_device {
@@ -26,11 +25,11 @@ resource "aws_instance" "gamesInstance" {
 
 resource "local_file" "rdp-script" {
   count           = var.awsProvider ? 1 : 0
-  depends_on      = [aws_instance.gamesInstance[0]]
+  depends_on      = [aws_instance.gamesInstance]
   filename        = "rdp-instance.sh"
   file_permission = "0750"
   content         = <<EOF
- xfreerdp /u:administrator /v:${aws_instance.gamesInstance[0].public_ip} /p:"${rsadecrypt(aws_instance.gamesInstance[0].password_data, file(local.keypath))}"
+ xfreerdp /u:administrator /v:${aws_instance.gamesInstance.public_ip} /p:"${rsadecrypt(aws_instance.gamesInstance.password_data, file(local.keypath))}"
 	EOF
 }
 
