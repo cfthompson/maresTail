@@ -24,6 +24,13 @@ resource "azurerm_subnet" "gamez-subnet" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+resource "azurerm_public_ip" "gamez-pub-ip" {
+  name                = "GamezPubIP"
+  resource_group_name = azurerm_resource_group.gamez-rg.name
+  location            = azurerm_resource_group.gamez-rg.location
+  allocation_method   = "Static"
+}
+
 resource "azurerm_network_interface" "gamez-nic" {
   name                = "gamez-nic"
   location            = azurerm_resource_group.gamez-rg.location
@@ -33,6 +40,7 @@ resource "azurerm_network_interface" "gamez-nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.gamez-subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.gamez-pub-ip.id
   }
 }
 
@@ -44,6 +52,7 @@ resource "azurerm_windows_virtual_machine" "gamez-vm" {
   #Standard_NC6_Promo
   admin_username = "guybrush"
   admin_password = "uFightL1ke@c0w"
+  custom_data    = base64encode(file("userdata.ps1"))
   network_interface_ids = [
     azurerm_network_interface.gamez-nic.id,
   ]
