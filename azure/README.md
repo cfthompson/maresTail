@@ -21,7 +21,7 @@ terraform and powershell code to automate the creation of a windows azure instan
 
 ## Pre-deployment tasks:
 
-1. Clone this repo, set up your AWS CLI credentials/tokens and install terraform.  Google around for a bit if you don't know how to do this.
+1. Clone this repo, set up your Azure CLI credentials/tokens and install terraform.  Google around for a bit if you don't know how to do this.
 
 2. Sign yourself up for an account on Zero Tier and create a VPN.  Make a note of the address space you'll be using.
 
