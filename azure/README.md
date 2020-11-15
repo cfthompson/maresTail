@@ -1,5 +1,5 @@
 # ec2-steamStreamer
-terraform and powershell code to automate the creation of a windows ec2 (and now, Azure VM) instance running steam.  Guess I should think about renaming the project...
+terraform and powershell code to automate the creation of a windows azure instance running steam
 
 - The utlimate goal here is, partly, to sketch this up with providers and similar instance types for Azure and GCP, and see if any one cloud provider's service offering works better for this use case than the others, but mostly, to play with terraform and learn how to bootstrap windows instances with powershell.
 
@@ -7,6 +7,8 @@ terraform and powershell code to automate the creation of a windows ec2 (and now
 
 ### TODO:
 
+- apparently Azure images don't execute the custom data (userdata) scripts, they just store them in binary form in the C:\AzureData directory.  There's apparerently a way to invoke this script if you're willing to build a custom image to do it.  Which means it's time to learn Packer...
+- parameterize/secretize username and password.  Right now they're hard coded in plaintext in the template, which is all kinds of bad. (And no, I won't be using these credentials for anything else. You wish!)
 - nvidia driver installs, but default display driver doesn't get disabled.
 - ZeroTier vpn client should be installing correctly now, but joining the network is still a manual process.  Need to somehow pass the network id as a param all the way to the userdata and modify the powershell script to read it.  Probably using environment variables.
 - work out how to do this as an Azure VM and/or GCE instance.
@@ -27,21 +29,10 @@ https://www.zerotier.com/
 
 3. Install the Zero Tier client on your local machine and join the network you created.  You can find documentation on this on the Zero Tier site.
 
-4. Decide on an AWS region, AMI, and VPC, and make a note of these id's.  Create a security group in that region and VPC that allows the following inbound (and everything outbound):
-
-   - RDP (TCP 3389) from only your ip address ("My IP" in the ec2 security group console dropdown)
-   - All Trafic from the address space of your Zero Tier VPN network.
-
- 5. Create an EC2 keypair and download the private key.  You'll need it to decrypt the Administrator password.
-
- 6. Populate the terraform variables, either by changing the default values in variables.tf or passing them on the CLI.  Specifically, set the AMI, secuirty group id, and keypair (all from step 4), and optionally change the instance type if you want a different instance type.
-
- Note: the vpcid variable currently isn't used, as the vpc gets matched via the security group parameter.
-
 ## Deploy:
 
  1. Run terraform init to download the providers.
 
  2. Run terraform plan to see what will be created, terraform apply to create it, and/or terraform destroy to tear it all down.
 
- 3. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, install VB-Cable, log into steam, click the noLockLogout shortcut, login to steam on your local linux machine, and see if you can stream your windows games.
+ 3. RDP in, see if things are working, join the zerotier network, authorize the new node on your zerotier network, install VB-Cable, log into steam, click the noLockLogout shortcut, login to steam on your local linux machine, and see if you can stream your windows games.  For now, the windows username and password are hardcoded in the template, and the public ip can be obtained from the Azure Portal or (probably) the CLI.
