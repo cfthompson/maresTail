@@ -1,5 +1,5 @@
-# ec2-steamStreamer
-terraform and powershell code to automate the creation of a windows ec2 (and now, Azure VM) instance running steam.  Guess I should think about renaming the project...
+# maresTail
+terraform and powershell code samples to build a windows ec2 and/or azure instance running steam for remote streaming
 
 - The utlimate goal here is, partly, to sketch this up with providers and similar instance types for Azure and GCP, and see if any one cloud provider's service offering works better for this use case than the others, but mostly, to play with terraform and learn how to bootstrap windows instances with powershell.
 
