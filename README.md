@@ -9,13 +9,13 @@ terraform and powershell code samples to build a windows ec2 and/or azure instan
 
 - nvidia driver installs, but default display driver doesn't get disabled.
 - ZeroTier vpn client should be installing correctly now, but joining the network is still a manual process.  Need to somehow pass the network id as a param all the way to the userdata and modify the powershell script to read it.  Probably using environment variables.
-- work out how to do this as an Azure VM and/or GCE instance.
+- work out how to do this as a GCE instance.
 
 ### Notes:
 
 - One annoying thing about the powershell script is the need to convert back and forth between newlines and newlines with carriage returns, otherwise the userdata gets passed as a single line. unix2dos and dos2unix tools help somehwat, but it's still incredibly annoying.
 - chocolately install of vb-cable doesn't work because there's no longer a silent install option. Powershell script downloads and extracts the package, but VBCABLE_SETUP_x64.exe needs to be run manually.
-- xfreerdp script generation is working now.  TF waits for and attempts to decrypt the local Administrator password using the private key of the keypair  provided (assuming the key is in ~/.ssh and has the same name as the keypair specified, with a .pem suffix) and plunks the plaintext password into the script.  If this were any sort of long lived system or one that could be used to gain access to sensitive resource, this would be a terrible bad idea.  Since it's a throwaway instance used soley for video games, it's only idea that's only mostly bad.
+- xfreerdp script generation is working now (for ec2).  TF waits for and attempts to decrypt the local Administrator password using the private key of the keypair  provided (assuming the key is in ~/.ssh and has the same name as the keypair specified, with a .pem suffix) and plunks the plaintext password into the script.  If this were any sort of long lived system or one that could be used to gain access to sensitive resource, this would be a terrible bad idea.  Since it's a throwaway instance used soley for video games, it's an idea that's only mostly bad.
 
 ## Pre-deployment tasks:
 

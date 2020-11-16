@@ -7,7 +7,6 @@ terraform and powershell code samples to build a windows azure instance running 
 
 ### TODO:
 
-- apparently Azure images don't execute the custom data (userdata) scripts, they just store them in binary form in the C:\AzureData directory.  There's apparerently a way to invoke this script if you're willing to build a custom image to do it.  Which means it's time to learn Packer...
 - parameterize/secretize username and password.  Right now they're hard coded in plaintext in the template, which is all kinds of bad. (And no, I won't be using these credentials for anything else. You wish!)
 - nvidia driver installs, but default display driver doesn't get disabled.
 - ZeroTier vpn client should be installing correctly now, but joining the network is still a manual process.  Need to somehow pass the network id as a param all the way to the userdata and modify the powershell script to read it.  Probably using environment variables.
