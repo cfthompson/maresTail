@@ -1,5 +1,3 @@
-<powershell>
-
 Start-Transcript -Path "C:\UserData.log" -Append;
 
 pwd;
@@ -77,4 +75,3 @@ cacls C:\Windows\System32\Drivers\BasicDisplay.sys /G Administrator:F;
 del C:\Windows\System32\Drivers\BasicDisplay.sys;
 
 echo "done";
-</powershell>

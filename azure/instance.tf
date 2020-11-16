@@ -69,3 +69,18 @@ resource "azurerm_windows_virtual_machine" "gamez-vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_virtual_machine_extension" "gamez-bootstrap" {
+  depends_on           = [ azurerm_windows_virtual_machine.gamez-vm ]
+  name                 = "gamez-bootstrap"
+  virtual_machine_id   = azurerm_windows_virtual_machine.gamez-vm.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  settings = <<SETTINGS
+    {
+        "commandToExecute": "powershell -Command \"cp c:/azuredata/customdata.bin c:/azuredata/bootstrap.ps1; c:/azuredata/bootstrap.ps1; exit 0\""
+    }
+SETTINGS
+}
