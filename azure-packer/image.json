@@ -1,0 +1,31 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+
+    "subscription_id": "${var.subscription_id}",
+    "client_id": "${var.client_id}",
+    "client_secret": "${var.client_secret}",
+
+    "managed_image_resource_group_name": "dummy",
+    "managed_image_name": "monkeySteamer",
+
+    "os_type": "Windows",
+    "image_publisher": "MicrosoftWindowsServer",
+    "image_offer": "WindowsServer",
+    "image_sku": "2016-Datacenter",
+
+    "location": "East US",
+    "vm_size": "Standard_DS2_v2",
+
+    "communicator": "winrm",
+    "winrm_use_ssl": true,
+    "winrm_insecure": true,
+    "winrm_timeout": "5m",
+    "winrm_username": "packer"
+  }],
+
+  "provisioners": [{
+    "type": "powershell",
+    "script": "./userdata.ps1"
+  }]
+}
