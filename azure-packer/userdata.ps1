@@ -17,8 +17,8 @@ $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8
 Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0
 Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0
 
-Stop-Process -Name Explorer
-Write-Host "IE Enhanced Security Configuration (ESC) has been disabled." -ForegroundColor Green
+#Stop-Process -Name Explorer
+#Write-Host "IE Enhanced Security Configuration (ESC) has been disabled." -ForegroundColor Green
 
 echo "install chocolatey";
 
@@ -30,7 +30,7 @@ echo "install and join vpn (to be implemented later)";
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile("https://download.zerotier.com/dist/ZeroTier%20One.msi", "zerotier.msi")
 
-zerotier.msi /q /norestart;
+#zerotier.msi /q /norestart;
 #pass environement variable to the command to join vpn here
 
 echo "Turn off windows firewall";
@@ -67,13 +67,14 @@ echo "install nvidia driver";
 
 (New-Object Net.WebClient).DownloadFile("http://us.download.nvidia.com/tesla/425.25/425.25-tesla-desktop-win10-64bit-international.exe", "nvidia.exe");
 
-nvidia.exe -s -noreboot -noeula -clean
+#nvidia.exe -s -noreboot -noeula -clean
 #/y /q /norestart;
 
-takeown /f C:\Windows\System32\Drivers\BasicDisplay.sys;
-cacls C:\Windows\System32\Drivers\BasicDisplay.sys /G Administrator:F;
-del C:\Windows\System32\Drivers\BasicDisplay.sys;
+#takeown /f C:\Windows\System32\Drivers\BasicDisplay.sys;
+#cacls C:\Windows\System32\Drivers\BasicDisplay.sys /G Administrator:F;
+#del C:\Windows\System32\Drivers\BasicDisplay.sys;
 
 echo "done";
 
-Sysprep.exe /oobe /generalize /quiet /quit
+#Sysprep.exe /oobe /generalize /quiet /quit
+exit 0
