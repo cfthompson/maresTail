@@ -1,12 +1,19 @@
 {
+  "variables": {
+    "subscription_id": "",
+    "client_id": "",
+    "client_secret": ""
+  },
+
   "builders": [{
     "type": "azure-arm",
 
-    "subscription_id": "${var.subscription_id}",
-    "client_id": "${var.client_id}",
-    "client_secret": "${var.client_secret}",
+    "subscription_id": "<your-subscription-id-here>",
+    "client_id": "<your-client-id-here>",
+    "client_secret": "<your-client-secret-here>",
 
-    "managed_image_resource_group_name": "dummy",
+
+    "managed_image_resource_group_name": "<your-resource-group-name-here>",
     "managed_image_name": "monkeySteamer",
 
     "os_type": "Windows",
